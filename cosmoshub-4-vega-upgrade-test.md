@@ -14,16 +14,22 @@ This doc uses the data exported from live cosmoshub-4 to mock the upgrade. We wi
 
 ### Build the binary of old version
 ```shell
+cd gaia
 git checkout release/v5.0.5
 make install
 # Please never do unsafe-reset-all in production environment !!!
 gaiad unsafe-reset-all
+```
+```shell
+gaiad version
+# v5.0.5
 ```
 ### Change the genesis file
 
 We have prepared a genesis file which was obtained by `gaiad export` on cosmoshub-4 network at height 7368387. Uncompress this genesis file and use it as the genesis data to mock the cosmoshub upgrade.
 
 ```shell
+cd vega-test
 gunzip genesis.json.gz
 # verify the hash
 cat genesis.json | shasum -a 256
@@ -36,9 +42,9 @@ Change one validator in the genesis file to be a validator that you have the pri
 #### Change the addresses and keys
 ```shell
 # change chain id
-sed -i '' 's%"chain_id": "cosmoshub-4",%"chain_id": "vega-test",%g' genesis.json
+sed -i '' 's%"chain_id": "cosmoshub-4",%"chain_id": "test",%g' genesis.json
 
-# substitue "Certus One", this is our  node1, you can find the key info. in priv_validator_key_val1.json in this repo. 
+# substitue "Certus One", this is our  node1, you can find the key info. in priv_validator_key_val1.json in this repo.
 sed -i '' 's%cOQZvh/h9ZioSeUMZB/1Vy1Xo5x2sjrVjlE/qHnYifM=%qwiUMxz3llsy45fPvM0a8+XQeAJLvrX3QAEJmRMEEoU=%g' genesis.json
 sed -i '' 's%B00A6323737F321EB0B8D59C6FD497A14B60938A%D5AB5E458FD9F9964EF50A80451B6F3922E6A4AA%g' genesis.json
 sed -i '' 's%cosmosvalcons1kq9xxgmn0uepav9c6kwxl4yh599kpyu28e7ee6%cosmosvalcons16k44u3v0m8uevnh4p2qy2xm08y3wdf92xsc3ve%g' genesis.json
@@ -57,7 +63,7 @@ sed -i '' 's%A6apc7iThbRkwboKqPy6eXxxQvTH+0lNkXZvugDM9V4g%ApDOUyfcamDmnbEO7O4YKn
 ```
 #### Fix delegation amount over 67%
 ```shell
-# change one delegator's delegation. This delegator can be any delegator who is delegating to our validator2(Binance Staking) in the delegation list. Increase his stake by 6,000,000,000,000,000.
+# change one delegator's delegation. This delegator can be any delegator who is delegating to our validator2(Binance Staking) in the delegation list. Increase this stake by 6,000,000,000,000,000.
 sed -i '' 's%"25390741.000000000000000000"%"6000000025390741.000000000000000000"%g' genesis.json
 
 # fix power of the validator
@@ -76,7 +82,7 @@ sed -i '' 's%277834757180509%6277834757180509%g' genesis.json
 
 # fix balance of bonded_tokens_pool module account
 #
-# module account for recording "Binance staking"'s received delegations:
+# module account for recording Binance staking(validator 2)'s received delegations:
 # cosmos1fl48vsnmsdzcv85q5d2q4z5ajdha8yu34mf0eh
 # Increase the delegation account by 6,000,000,000,000,000
 sed -i '' 's%194616098248861%6194616098248861%g' genesis.json
@@ -90,7 +96,7 @@ Change the minimum deposit amount, quorum, threshold, and voting period.Those ch
 sed -i '' 's%"amount": "64000000",%"amount": "1",%g' genesis.json
 #   min voting power that a proposal requires in order to be a valid proposal
 sed -i '' 's%"quorum": "0.400000000000000000",%"quorum": "0.000000000000000001",%g' genesis.json
-# the minimum proportion of Yes votes requires for the proposal to pass
+# the minimum proportion of "yes" votes requires for the proposal to pass
 sed -i '' 's%"threshold": "0.500000000000000000",%"threshold": "0.000000000000000001",%g' genesis.json
 # voting period 
 sed -i '' 's%"voting_period": "1209600s"%"voting_period": "60s"%g' genesis.json
@@ -100,7 +106,7 @@ sed -i '' 's%"voting_period": "1209600s"%"voting_period": "60s"%g' genesis.json
 ```shell
 export EXPORTED_GENESIS=genesis.json 
 export BINARY=gaiad 
-export CHAIN_ID=vega-test 
+export CHAIN_ID=test 
 export CHAIN_DIR=data 
 
 export VAL_1_CHAIN_DIR=$CHAIN_DIR/$CHAIN_ID/val1 
@@ -116,11 +122,11 @@ export USER_KEY_NAME="user"
 ```
 #### Init the chain and setup the user account
 ```shell
-$BINARY config chain-id vega-test --home $VAL_1_CHAIN_DIR 
+$BINARY config chain-id test --home $VAL_1_CHAIN_DIR 
 $BINARY config keyring-backend test --home $VAL_1_CHAIN_DIR 
 $BINARY config broadcast-mode block --home $VAL_1_CHAIN_DIR 
 
-$BINARY config chain-id vega-test --home $VAL_2_CHAIN_DIR 
+$BINARY config chain-id test --home $VAL_2_CHAIN_DIR 
 $BINARY config keyring-backend test --home $VAL_2_CHAIN_DIR 
 $BINARY config broadcast-mode block --home $VAL_2_CHAIN_DIR 
 
@@ -172,11 +178,12 @@ sed -i '' 's/pprof_laddr = "localhost:6060"/pprof_laddr = "localhost:'$VAL_2_PPR
 sed -i '' 's/addr_book_strict = true/addr_book_strict = false/g' $VAL_2_CHAIN_DIR/config/config.toml
 sed -i '' 's/addr_book_strict = true/addr_book_strict = false/g' $VAL_1_CHAIN_DIR/config/config.toml
 ```
-disable the Rosetta API server ???
+disable the Rosetta API server
 ```shell
 # Enable defines if the Rosetta API server should be enabled.
 # enable = false
 sed -i '' '/Enable defines if the Rosetta API server/,/Address defines the Rosetta API server/s/enable = true/enable = false/' $VAL_1_CHAIN_DIR/config/app.toml
+sed -i '' '/Enable defines if the Rosetta API server/,/Address defines the Rosetta API server/s/enable = true/enable = false/' $VAL_2_CHAIN_DIR/config/app.toml
 ```
 ### Cosmosvisor
 #### set cosmosvisor
@@ -190,10 +197,11 @@ cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/genesis/bin
 
 Build the new gaia binary
 ```shell
+cd gaia
 git checkout start-upgrade
 make install
 ```
-Create the folder for the two nodes and put the upgrade gaia binary into `cosmovisor/upgrades/vega/bin`:
+Create the folders for the two nodes and put the upgrade gaia binary into `cosmovisor/upgrades/vega/bin`:
 ```shell
 mkdir -p $VAL_1_CHAIN_DIR/cosmovisor/upgrades/vega/bin
 mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/upgrades/vega/bin
@@ -235,11 +243,12 @@ cosmovisor tx gov submit-proposal software-upgrade vega \
 --yes
 ```
 ### Vote
-open a new terminal and `cd` into this repo.
+open a new terminal to vote by user.
 ```shell
+cd vega-test
 gaiad query gov proposal 54 \
---chain-id vega-test \
---home data/vega-test/val2 \
+--chain-id test \
+--home data/test/val2 \
 --node tcp://127.0.0.1:36657 
 ```
 
@@ -278,7 +287,7 @@ voting_start_time: ""
 
 ## Upgrade result
 
-Wait till the height is reached, you can find info. in the log: `applying upgrade "vega" at height:7368822`. Then the chain will progress to produce blocks after the upgrade.
+Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "vega" NEEDED at height: 7368489: upgrade to vega` and `applying upgrade "vega" at height:7368822`. Then the chain will progress to produce blocks after the upgrade.
 
 
 ## Reference
