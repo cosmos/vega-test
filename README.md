@@ -17,8 +17,6 @@ This doc uses the data exported from live cosmoshub-4 to mock the upgrade. We wi
 cd gaia
 git checkout release/v5.0.5
 make install
-# Please never do unsafe-reset-all in production environment !!!
-gaiad unsafe-reset-all
 ```
 ```shell
 gaiad version
