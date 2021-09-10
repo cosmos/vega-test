@@ -5,7 +5,7 @@ This upgrade will bring the new release of Cosmos-SDK v0.44.0 and IBC 1.0-RC6 in
 
 ## Version
 - presently running cosmoshub-4, Gaia version: v5.0.5
-- going to upgrade to cosmoshub-5, Gaia version: v6.0.0-vega ?
+- going to upgrade to cosmoshub-4, Gaia version: v6.0.0-vega ?
 
 ## Chain upgrade by cosmovisor
 
@@ -24,7 +24,7 @@ gaiad version
 ```
 ### Change the genesis file
 
-We have prepared a genesis file which was obtained by `gaiad export` on cosmoshub-4 network at height 7368387. Uncompress this genesis file and use it as the genesis data to mock the cosmoshub upgrade.
+We have prepared a genesis file in this repo which was obtained by `gaiad export` on cosmoshub-4 network at height 7368387. Uncompress this genesis file and use it as the genesis data to mock the cosmoshub upgrade.
 
 ```shell
 cd vega-test
@@ -261,7 +261,7 @@ content:
   '@type': /cosmos.upgrade.v1beta1.SoftwareUpgradeProposal
   description: upgrade to vega
   plan:
-    height: "7368822"
+    height: "7368587"
     info: upgrade to vega
     name: vega
     time: ""
@@ -285,7 +285,7 @@ voting_start_time: ""
 
 ## Upgrade result
 
-Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "vega" NEEDED at height: 7368489: upgrade to vega` and `applying upgrade "vega" at height:7368822`. Then the chain will progress to produce blocks after the upgrade.
+Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "vega" NEEDED at height: 7368587: upgrade to vega` and `applying upgrade "vega" at height:7368587`. Then the chain will progress to produce blocks after the upgrade.
 
 
 ## Reference
