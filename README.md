@@ -287,6 +287,9 @@ voting_start_time: ""
 
 Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "vega" NEEDED at height: 7368587: upgrade to vega` and `applying upgrade "vega" at height:7368587`. Then the chain will progress to produce blocks after the upgrade.
 
+## Further info: test new modules
+Now you can explore the functions of new modules in gaia.
+For authz module, you can refer https://github.com/cosmos/sdk-tutorials/pull/786/files for further testing.
 
 ## Reference
 
