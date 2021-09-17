@@ -5,12 +5,12 @@ This upgrade will bring the new release of Cosmos-SDK v0.44.0 and IBC 1.0-RC6 in
 
 ## Version
 - presently running cosmoshub-4, Gaia version: v5.0.5
-- going to upgrade to cosmoshub-4, Gaia version: v6.0.0-vega ?
+- going to upgrade to cosmoshub-4, Gaia version: v6.0.0
 
 ## Chain upgrade by cosmovisor
 
 ### Test Plan
-This doc uses the data exported from live cosmoshub-4 to mock the upgrade. We will run two nodes locally with an exported genesis file to upgrade both nodes to gaia v6.0.0-vega by cosmovisor. One of the two nodes will be a validator with over 67% power.
+This document uses the data exported from live cosmoshub-4 to mock the upgrade. We will run two nodes locally with an exported genesis file to upgrade both nodes to gaia v6.0.0-vega by cosmovisor. One of the two nodes will be a validator with over 67% power.
 
 ### Build the binary of old version
 ```shell
@@ -50,7 +50,7 @@ sed -i '' 's%cosmosvalcons1kq9xxgmn0uepav9c6kwxl4yh599kpyu28e7ee6%cosmosvalcons1
 # substitue "Binance Staking", this is our node2, also the validator who will own over 67% power. you can find the key info. in priv_validator_key_val1.json in this repo. 
 # tendermint pub_key
 sed -i '' 's%W459Kbdx+LJQ7dLVASW6sAfdqWqNRSXnvc53r9aOx/o=%oi55Dw+JjLQc4u1WlAS3FsGwh5fd5/N5cP3VOLnZ/H0=%g' genesis.json
-# priv_val_key address ???
+# priv_val address
 sed -i '' 's%83F47D7747B0F633A6BA0DF49B7DCF61F90AA1B0%7CB07B94FD743E2A8520C2B50DA4B03740643BF5%g' genesis.json
 #  Validator consensus address, try command ` gaiad keys parse 83F47D7747B0F633A6BA0DF49B7DCF61F90AA1B0` to see if you can get the same addr.
 sed -i '' 's%cosmosvalcons1s0686a68krmr8f46ph6fklw0v8us4gdsm7nhz3%cosmosvalcons10jc8h98awslz4pfqc26smf9sxaqxgwl4x`vxpcrp%g' genesis.json
@@ -224,7 +224,7 @@ export DAEMON_RESTART_AFTER_UPGRADE=true
 cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
 ```
 ### Propose upgrade
-The user owns by val2 is a delegator. So user can vote. Since we changed the [gov parameters](###Modify some gov parameters for test efficiency), the delegations this user delegated are far enough for this proposal to pass. 
+The user owns by val2 is a delegator. So user can vote. Since we changed the [gov parameters](####Modify some gov parameters for test efficiency), the delegations this user delegated are far enough for this proposal to pass. 
 ```shell
 cosmovisor tx gov submit-proposal software-upgrade vega \
 --title vega \
