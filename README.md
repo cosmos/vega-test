@@ -1,6 +1,6 @@
 # Cosmos-Hub Vega  Upgrade Test Instruction
 
-This document describes the  procedures to test cosmoshub vega upgrade locally.
+This document describes the  procedures to test cosmoshub Vega upgrade locally.
 This upgrade will bring the new release of Cosmos-SDK v0.44.0 and IBC 1.0-RC6 into gaia.
 
 ## Version
@@ -10,7 +10,7 @@ This upgrade will bring the new release of Cosmos-SDK v0.44.0 and IBC 1.0-RC6 in
 ## Chain upgrade by cosmovisor
 
 ### Test Plan
-This document uses the data exported from live cosmoshub-4 to mock the upgrade. We will run two nodes locally with an exported genesis file to upgrade both nodes to gaia v6.0.0-vega by cosmovisor. One of the two nodes will be a validator with over 67% power.
+This document uses the data exported from live cosmoshub-4 to mock the upgrade. We will run two nodes locally with an exported genesis file to upgrade both nodes to gaia v6.0.0-Vega by cosmovisor. One of the two nodes will be a validator with over 67% power.
 
 ### Build the binary of old version
 ```shell
@@ -27,7 +27,7 @@ gaiad version
 We have prepared a genesis file in this repo which was obtained by `gaiad export` on cosmoshub-4 network at height 7368387. Uncompress this genesis file and use it as the genesis data to mock the cosmoshub upgrade.
 
 ```shell
-cd vega-test
+cd Vega-test
 gunzip genesis.json.gz
 # verify the hash
 cat genesis.json | shasum -a 256
@@ -199,12 +199,12 @@ cd gaia
 git checkout start-upgrade
 make install
 ```
-Create the folders for the two nodes and put the upgrade gaia binary into `cosmovisor/upgrades/vega/bin`:
+Create the folders for the two nodes and put the upgrade gaia binary into `cosmovisor/upgrades/Vega/bin`:
 ```shell
-mkdir -p $VAL_1_CHAIN_DIR/cosmovisor/upgrades/vega/bin
-mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/upgrades/vega/bin
-cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/upgrades/vega/bin
-cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/upgrades/vega/bin
+mkdir -p $VAL_1_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
+mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
+cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
+cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 ```
 #### Start by cosmovisor
 For val1:
@@ -226,12 +226,12 @@ cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
 ### Propose upgrade
 The user owns by val2 is a delegator. So user can vote. Since we changed the [gov parameters](####Modify some gov parameters for test efficiency), the delegations this user delegated are far enough for this proposal to pass. 
 ```shell
-cosmovisor tx gov submit-proposal software-upgrade vega \
---title vega \
+cosmovisor tx gov submit-proposal software-upgrade Vega \
+--title Vega \
 --deposit 100uatom \
 --upgrade-height 7368587 \
---upgrade-info "upgrade to vega" \
---description "upgrade to vega" \
+--upgrade-info "upgrade to Vega" \
+--description "upgrade to Vega" \
 --gas 400000 \
 --from user \
 --keyring-backend test \
@@ -259,14 +259,14 @@ the proposal status should be `PROPOSAL_STATUS_PASSED`.
 ```shell
 content:
   '@type': /cosmos.upgrade.v1beta1.SoftwareUpgradeProposal
-  description: upgrade to vega
+  description: upgrade to Vega
   plan:
     height: "7368587"
-    info: upgrade to vega
-    name: vega
+    info: upgrade to Vega
+    name: Vega
     time: ""
     upgraded_client_state: null
-  title: vega
+  title: Vega
 deposit_end_time: ""
 final_tally_result:
   abstain: "0"
@@ -285,7 +285,7 @@ voting_start_time: ""
 
 ## Upgrade result
 
-Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "vega" NEEDED at height: 7368587: upgrade to vega` and `applying upgrade "vega" at height:7368587`. Then the chain will progress to produce blocks after the upgrade.
+Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "Vega" NEEDED at height: 7368587: upgrade to Vega` and `applying upgrade "Vega" at height:7368587`. Then the chain will progress to produce blocks after the upgrade.
 
 ## Further info: test new modules
 Now you can explore the functions of new modules in gaia.
