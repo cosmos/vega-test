@@ -53,7 +53,7 @@ sed -i '' 's%W459Kbdx+LJQ7dLVASW6sAfdqWqNRSXnvc53r9aOx/o=%oi55Dw+JjLQc4u1WlAS3Fs
 # priv_val address
 sed -i '' 's%83F47D7747B0F633A6BA0DF49B7DCF61F90AA1B0%7CB07B94FD743E2A8520C2B50DA4B03740643BF5%g' genesis.json
 #  Validator consensus address, try command ` gaiad keys parse 83F47D7747B0F633A6BA0DF49B7DCF61F90AA1B0` to see if you can get the same addr.
-sed -i '' 's%cosmosvalcons1s0686a68krmr8f46ph6fklw0v8us4gdsm7nhz3%cosmosvalcons10jc8h98awslz4pfqc26smf9sxaqxgwl4x`vxpcrp%g' genesis.json
+sed -i '' 's%cosmosvalcons1s0686a68krmr8f46ph6fklw0v8us4gdsm7nhz3%cosmosvalcons10jc8h98awslz4pfqc26smf9sxaqxgwl4vxpcrp%g' genesis.json
 
 # substitute a user account,this user account is a delegator in the genesis file. This user account will be owned by node2(validator2) in the later setup.
 sed -i '' 's%cosmos1z98eg2ztdp2glyla62629nrlvczg8s7f0tm3dx%cosmos1wvvhhfm387xvfnqshmdaunnpujjrdxznr5d5x9%g' genesis.json
@@ -133,7 +133,7 @@ $BINARY init test --home $VAL_1_CHAIN_DIR --chain-id=$CHAIN_ID
 # Validator 2
 $BINARY --home $VAL_2_CHAIN_DIR init test --chain-id=$CHAIN_ID
 #user
-echo $USER_2_MNEMONIC | $BINARY --home $USER_2_CHAIN_DIR keys add $USER_2_KEY_NAME --recover --keyring-backend=test
+echo $USER_MNEMONIC | $BINARY --home $USER_CHAIN_DIR keys add $USER_KEY_NAME --recover --keyring-backend=test
 ```
 #### Replace the genesis file and priv_validator_key.json
 ```shell
