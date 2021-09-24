@@ -244,10 +244,13 @@ cosmovisor tx gov submit-proposal software-upgrade Vega \
 open a new terminal to vote by user.
 ```shell
 cd vega-test
-gaiad query gov proposal 54 \
+gaiad vote gov proposal 54 \
+--from user \
+--keyring-backend test \
 --chain-id test \
 --home data/test/val2 \
 --node tcp://127.0.0.1:36657 
+--yes
 ```
 
 after voting period finishes, check the vote result by
