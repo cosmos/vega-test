@@ -10,7 +10,11 @@ This upgrade will bring the new release of Cosmos-SDK v0.44.0 and IBC 1.0-RC6 in
 ## Chain upgrade by cosmovisor
 
 ### Test Plan
-This document uses the data exported from live cosmoshub-4 to mock the upgrade. We will run two nodes locally with an exported genesis file to upgrade both nodes to gaia v6.0.0-Vega by cosmovisor. One of the two nodes will be a validator with over 67% power.
+This document uses the data exported from live cosmoshub-4 to mock the upgrade. We will run two nodes locally with an exported genesis file to upgrade both nodes to gaia v6.0.0-Vega by cosmovisor. Specifically, we will do the followings:
+- we will modify the genesis to take control of two nodes, by swapping out the accounts of certus one (node 1) and binance (node 2).
+- we will give node 2 more than 67% power so that we can produce blocks ourselves.
+- we will modify the genesis to take control of a user account (which is also a delegator) to let this user propose, deposit and vote for the upgrade proposal. 
+- we will change the voting parameters so that the upgrade proposal can be processed fast and pass.
 
 ### Build the binary of old version
 ```shell
