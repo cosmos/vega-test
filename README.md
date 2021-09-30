@@ -224,7 +224,7 @@ export DAEMON_RESTART_AFTER_UPGRADE=true
 cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
 ```
 ### Propose upgrade
-The user owns by val2 is a delegator. So user can vote. Since we changed the [gov parameters](####Modify some gov parameters for test efficiency), the delegations this user delegated are far enough for this proposal to pass. 
+The user owns by val2 is a delegator. So user can vote. Since we changed the gov parameters, the delegations this user delegated are far enough for this proposal to pass.
 ```shell
 cosmovisor tx gov submit-proposal software-upgrade Vega \
 --title Vega \
@@ -244,7 +244,7 @@ cosmovisor tx gov submit-proposal software-upgrade Vega \
 open a new terminal to vote by user.
 ```shell
 cd vega-test
-gaiad vote gov proposal 54 \
+gaiad tx gov vote 54 yes \
 --from user \
 --keyring-backend test \
 --chain-id test \
