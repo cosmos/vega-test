@@ -294,6 +294,15 @@ voting_start_time: ""
 
 Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "Vega" NEEDED at height: 7368587: upgrade to Vega` and `applying upgrade "Vega" at height:7368587`. Then the chain will progress to produce blocks after the upgrade.
 
+## Repeating the test
+
+If you want to try running the test again, or if you made a mistake while running it the first time, make sure to do the following steps:
+
+1. `gaiad unsafe-reset-all --home test/val2` and `gaiad unsafe-reset-all --home test/val1` for each validator's home directory.
+2. If you ran the upgrade successfully, make sure you remove the downloaded binary from `test/val1/cosmovisor/upgrades/Vega` and `test/val2/cosmovisor/upgrades/Vega`.
+3. Also remove the symbolic link with `rm test/val1/cosmovisor/current` and `rm test/val2/cosmovisor/current`.
+4. Now you should be able to start the two binaries again and perform the upgrade from the start.
+
 ## Further info: test new modules
 Now you can explore the functions of new modules in gaia.
 For authz module, you can refer https://github.com/cosmos/sdk-tutorials/pull/786/files for further testing.
