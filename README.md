@@ -210,7 +210,7 @@ mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 ```
-#### Start by cosmovisor
+#### Start cosmovisor
 For val1:
 ```shell
 export DAEMON_NAME=gaiad
@@ -228,7 +228,27 @@ export DAEMON_RESTART_AFTER_UPGRADE=true
 cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
 ```
 ### Propose upgrade
-The user owns by val2 is a delegator. So user can vote. Since we changed the gov parameters, the delegations this user delegated are far enough for this proposal to pass.
+The account owned by val2 is a delegator that has more than 67% of voting power, so any vote by this account will be enough to make the proposal succeed. The gov parameter for voting time was also reduced to 60 seconds, so after making the proposal be sure to vote quickly. There are two options for the proposal. One is for automatic downloads, which will take the correct binary from the github releases and install it in the correct cosmovisor directory to start running the upgrade at the correct block height. The other method requires you to download the binary manually and put it in the cosmovisor directory. We recommend trying the autodownload but if you want to be sure that the binary downloaded is absolutely correct it is good to do your own checksum validation. Below are instrucitons for both **autodownload** and **manual download**. The auto-download also includes instruciotns in case the download or the checksum fails.
+
+#### Auto-Download
+
+```shell
+gaiad tx gov submit-proposal software-upgrade Vega \
+--title Vega \
+--deposit 100uatom \
+--upgrade-height 7368420 \
+--upgrade-info '{"binaries":{"linux/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-linux-amd64?checksum=sha256:78d626bbb12352c3301b02429188a89104606a5c746d7e3f3d6d4b2a01d04711","linux/arm64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-linux-arm64?checksum=sha256:d15b13e937220eaee77ddb2e1e866adb5e9982041f5f5567b087f7b79b7bf4cd","darwin/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-darwin-amd64?checksum=sha256:a0da886991dcd3bf2a4e5efff37e09b822fe65998bd5ba8d1a9aed1f83796057","windows/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-windows-amd64?checksum=sha256:54b9d0d0d9ea0c3dcfc074270aa2dca95ce395f09e22275b7fd8f4a51f5d7db3"}}' \
+--description "upgrade to Vega" \
+--gas 400000 \
+--from user \
+--keyring-backend test \
+--chain-id test \
+--home test/val2 \
+--node tcp://localhost:36657 \
+--yes
+```
+
+#### Manual Download
 ```shell
 cosmovisor tx gov submit-proposal software-upgrade Vega \
 --title Vega \
