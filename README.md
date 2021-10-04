@@ -13,7 +13,7 @@ This upgrade will bring the new release of Cosmos-SDK v0.44.0 and IBC 1.0-RC6 in
 This document uses the data exported from live cosmoshub-4 to mock the upgrade. We will run two nodes locally with an exported genesis file to upgrade both nodes to gaia v6.0.0-Vega by cosmovisor. Specifically, we will do the followings:
 - we will modify the genesis to take control of two nodes, by swapping out the accounts of certus one (node 1) and binance (node 2).
 - we will give node 2 more than 67% power so that we can produce blocks ourselves.
-- we will modify the genesis to take control of a user account (which is also a delegator) to let this user propose, deposit and vote for the upgrade proposal. 
+- we will modify the genesis to take control of a user account (which is also a delegator so that this delegator can use his own delegation to vote) to let this user propose, deposit and vote for the upgrade proposal. 
 - we will change the voting parameters so that the upgrade proposal can be processed fast and pass.
 
 ### Build the binary of old version
@@ -180,7 +180,7 @@ sed -i '' 's/pprof_laddr = "localhost:6060"/pprof_laddr = "localhost:'$VAL_2_PPR
 sed -i '' 's/addr_book_strict = true/addr_book_strict = false/g' $VAL_2_CHAIN_DIR/config/config.toml
 sed -i '' 's/addr_book_strict = true/addr_book_strict = false/g' $VAL_1_CHAIN_DIR/config/config.toml
 ```
-disable the Rosetta API server
+Disable the Rosetta API server:
 ```shell
 # Enable defines if the Rosetta API server should be enabled.
 # enable = false
@@ -188,7 +188,30 @@ sed -i '' '/Enable defines if the Rosetta API server/,/Address defines the Roset
 sed -i '' '/Enable defines if the Rosetta API server/,/Address defines the Rosetta API server/s/enable = true/enable = false/' $VAL_2_CHAIN_DIR/config/app.toml
 ```
 ### Cosmosvisor
-#### set cosmosvisor
+Here we will show you two ways of using cosmovisor to upgrade: with manually prepare the new binary (method I) and with [auto-download](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor#auto-download) the new binary(method II).
+Method I requires node runners manually build the old and new binary and put them  into right dir in `cosmovisor` folder (as shown below). Then cosmovisor will switch to the new binary upon upgrade height.
+```shell
+.
+├── current -> genesis or upgrades/<name>
+├── genesis
+│   └── bin
+│       └── gaiad
+└── upgrades
+    └── Vega
+        ├── bin
+        │   └── gaiad
+        └── upgrade-info.json
+```
+
+By using auto-download setup (Method II), node runners do not need to prepare the new binaries manually. When propose upgrade, the `--upgrade-info` should include a link of the new binary. The environmental variable `DAEMON_ALLOW_DOWNLOAD_BINARIES` is set to be true.  Upon the upgrade height, if cosmovisor cannot find the new binnary locally, cosmovisor will download the new binary according to the instruction in the `upgrade-info.json`(this `data/up-grade-info.json` file is generated upon upgrade) and put the new binary in `cosmovior/upgrade/Vega/bin` and switch to run the new binary.
+
+*Note:*
+- In general, autodownload is not recommended, especially when the validators are not able to confirm the links are secure and correct.
+- For Vega upgrade, gaia will upgrade its dependency on  Cosmos SDK v0.42 to Cosmos SDK v0.44, this will require [Cosmovisor v0.1](https://github.com/cosmos/cosmos-sdk/releases/tag/cosmovisor%2Fv0.1.0). Later versions of cosmovisor do not support Cosmos SDK v0.42 or earlier if the auto-download option is enabled.
+- by using cosmovisor v0.1 you might have [node hanging issue](https://github.com/cosmos/cosmos-sdk/issues/9875) when query a result of large output size. For example, `gaiad q gov proposals` will hang the node being queried, this issue will not appear for cosmovisor versions later than v0.1.
+
+#### method I: manually prepare the new binary
+##### method I: set cosmosvisor
 create the folder for cosmosvisor for val1 and val2, and put the old binary in `cosmovisor/genesis/bin`.
 ```shell
 mkdir -p $VAL_1_CHAIN_DIR/cosmovisor/genesis/bin
@@ -210,7 +233,7 @@ mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 ```
-#### Start by cosmovisor
+##### method I: start by cosmovisor
 For val1:
 ```shell
 export DAEMON_NAME=gaiad
@@ -227,7 +250,7 @@ export DAEMON_HOME= $(pwd)/$VAL_2_CHAIN_DIR
 export DAEMON_RESTART_AFTER_UPGRADE=true
 cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
 ```
-### Propose upgrade
+##### Method I: propose upgrade
 The user owns by val2 is a delegator. So user can vote. Since we changed the gov parameters, the delegations this user delegated are far enough for this proposal to pass.
 ```shell
 cosmovisor tx gov submit-proposal software-upgrade Vega \
@@ -244,7 +267,7 @@ cosmovisor tx gov submit-proposal software-upgrade Vega \
 --node tcp://localhost:36657 \
 --yes
 ```
-### Vote
+##### Method I: Vote
 open a new terminal to vote by user.
 ```shell
 cd vega-test
@@ -290,18 +313,115 @@ voting_end_time: ""
 voting_start_time: ""
 ```
 
-## Upgrade result
+#### Method II: auto-download the new binary
+##### method II: set cosmosvisor
 
+Create the folder for cosmosvisor for val1 and val2, and put the old binary in `cosmovisor/genesis/bin`.
+```shell
+mkdir -p $VAL_1_CHAIN_DIR/cosmovisor/genesis/bin
+mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/genesis/bin
+cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/genesis/bin
+cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/genesis/bin
+```
+##### method II: start by cosmovisor
+For val1:
+```shell
+export DAEMON_NAME=gaiad
+export DAEMON_HOME= $(pwd)/$VAL_1_CHAIN_DIR
+export DAEMON_RESTART_AFTER_UPGRADE=true
+export DAEMON_ALLOW_DOWNLOAD_BINARIES=true
+cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_1_CHAIN_DIR
+```
+For val2:
+
+open a new terminal:
+```shell
+export DAEMON_NAME=gaiad
+export DAEMON_HOME= $(pwd)/$VAL_2_CHAIN_DIR
+export DAEMON_RESTART_AFTER_UPGRADE=true
+export DAEMON_ALLOW_DOWNLOAD_BINARIES=true
+cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
+```
+##### Method II: propose upgrade
+```shell
+gaiad tx gov submit-proposal software-upgrade Vega \
+--title Vega \
+--deposit 100uatom \
+--upgrade-height 7368587 \
+--upgrade-info '{"binaries":{"linux/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-linux-amd64?checksum=sha256:78d626bbb12352c3301b02429188a89104606a5c746d7e3f3d6d4b2a01d04711","linux/arm64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-linux-arm64?checksum=sha256:d15b13e937220eaee77ddb2e1e866adb5e9982041f5f5567b087f7b79b7bf4cd","darwin/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-darwin-amd64?checksum=sha256:a0da886991dcd3bf2a4e5efff37e09b822fe65998bd5ba8d1a9aed1f83796057","windows/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-windows-amd64?checksum=sha256:54b9d0d0d9ea0c3dcfc074270aa2dca95ce395f09e22275b7fd8f4a51f5d7db3"}}' \
+--description "upgrade to Vega" \
+--gas 400000 \
+--from user \
+--keyring-backend test \
+--chain-id test \
+--home data/test/val2 \
+--node tcp://localhost:36657 \
+--yes
+```
+##### Method II: Vote
+open a new terminal to vote by user.
+```shell
+cd vega-test
+gaiad tx gov vote 54 yes \
+--from user \
+--keyring-backend test \
+--chain-id test \
+--home data/test/val2 \
+--node tcp://127.0.0.1:36657 
+--yes
+```
+after voting period finishes, check the vote result by
+
+```shell
+$BINARY query gov proposal 54
+```
+the proposal status should be `PROPOSAL_STATUS_PASSED`.
+```shell
+content:
+  '@type': /cosmos.upgrade.v1beta1.SoftwareUpgradeProposal
+  description: upgrade to Vega
+  plan:
+    height: "7368587"
+    info: '{"binaries":{"linux/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-linux-amd64?checksum=sha256:78d626bbb12352c3301b02429188a89104606a5c746d7e3f3d6d4b2a01d04711","linux/arm64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-linux-arm64?checksum=sha256:d15b13e937220eaee77ddb2e1e866adb5e9982041f5f5567b087f7b79b7bf4cd","darwin/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-darwin-amd64?checksum=sha256:a0da886991dcd3bf2a4e5efff37e09b822fe65998bd5ba8d1a9aed1f83796057","windows/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-windows-amd64?checksum=sha256:54b9d0d0d9ea0c3dcfc074270aa2dca95ce395f09e22275b7fd8f4a51f5d7db3"}}'
+    name: Vega
+    time: ""
+    upgraded_client_state: null
+  title: Vega
+deposit_end_time: ""
+final_tally_result:
+  abstain: "0"
+  "no": "0"
+  no_with_veto: "0"
+  "yes": "0"
+proposal_id: "54"
+status: PROPOSAL_STATUS_PASSED
+submit_time: ""
+total_deposit:
+- amount: "100"
+  denom: uatom
+voting_end_time: ""
+voting_start_time: ""
+```
+Upon upgrade, a `upgrade-info.json` is generated, you can find it in `vega-test/data/test/val2/data`
+The upgrade-info.json contains the upgrade information:
+```shell
+{"name":"Vega","height":7368587}  ???
+```
+
+## Upgrade result
+### Method I:
 Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "Vega" NEEDED at height: 7368587: upgrade to Vega` and `applying upgrade "Vega" at height:7368587`. Then the chain will progress to produce blocks after the upgrade.
+### Method II:
+???
 
 ## Repeating the test
 
 If you want to try running the test again, or if you made a mistake while running it the first time, make sure to do the following steps:
 
-1. `gaiad unsafe-reset-all --home test/val2` and `gaiad unsafe-reset-all --home test/val1` for each validator's home directory.
-2. If you ran the upgrade successfully, make sure you remove the downloaded binary from `test/val1/cosmovisor/upgrades/Vega` and `test/val2/cosmovisor/upgrades/Vega`.
-3. Also remove the symbolic link with `rm test/val1/cosmovisor/current` and `rm test/val2/cosmovisor/current`.
-4. Now you should be able to start the two binaries again and perform the upgrade from the start.
+1. `cd vega-test`,`gaiad unsafe-reset-all --home data/test/val1` and `gaiad unsafe-reset-all --home data/test/val2`
+2. If you ran the upgrade successfully with cosmovisor `auto-download` enabled, make sure you remove the downloaded binary from `data/test/val1/cosmovisor/upgrades/Vega` and `data/test/val2/cosmovisor/upgrades/Vega`.
+3. Also remove the symbolic link with `rm data/test/val1/cosmovisor/current` and `rm data/test/val2/cosmovisor/current`.
+Now you should be able to start the two binaries again and perform the upgrade from the start.
 
 ## Further info: test new modules
 Now you can explore the functions of new modules in gaia.
@@ -317,6 +437,7 @@ For authz module, you can refer https://github.com/cosmos/sdk-tutorials/pull/786
 
 [Gravity DEX Upgrade Simulation Test](https://github.com/b-harvest/gravity-dex-upgrade-test/blob/kogisin/v5.0.5-upgrade-simulation/v5.0.5/README.md)
 
+[cosmovisor](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor)
 ## changes in genesis file
 
 ```diff
