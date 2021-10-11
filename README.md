@@ -233,7 +233,7 @@ mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 ```
-##### method I: start by cosmovisor
+##### method I: start cosmovisor
 For val1:
 ```shell
 export DAEMON_NAME=gaiad
@@ -323,7 +323,7 @@ mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/genesis/bin
 cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/genesis/bin
 cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/genesis/bin
 ```
-##### method II: start by cosmovisor
+##### method II: start cosmovisor
 For val1:
 ```shell
 export DAEMON_NAME=gaiad
@@ -405,22 +405,21 @@ voting_start_time: ""
 Upon upgrade, a `upgrade-info.json` is generated, you can find it in `vega-test/data/test/val2/data`
 The upgrade-info.json contains the upgrade information:
 ```shell
-{"name":"Vega","height":7368587}  ???
+{"name":"Vega","height":7368587}
 ```
 
 ## Upgrade result
 ### Method I:
-Wait till the height is reached, you can find info. in the log:  `ERR UPGRADE "Vega" NEEDED at height: 7368587: upgrade to Vega` and `applying upgrade "Vega" at height:7368587`. Then the chain will progress to produce blocks after the upgrade.
+Wait till the upgrade height is reached, you can find info. in the log:  `ERR UPGRADE "Vega" NEEDED at height: 7368587: upgrade to Vega` and `applying upgrade "Vega" at height:7368587`. Then the chain will progress to produce blocks after both nodes upgrade.
 ### Method II:
-???
+Wait till the upgrade height is reached, you can find info. in the lob: `INF applying upgrade "Vega" at height: 7368587`. Then chain will progress to produce blocks after both nodes upgrade.
 
 ## Repeating the test
 
 If you want to try running the test again, or if you made a mistake while running it the first time, make sure to do the following steps:
 
 1. `cd vega-test`,`gaiad unsafe-reset-all --home data/test/val1` and `gaiad unsafe-reset-all --home data/test/val2`
-2. If you ran the upgrade successfully with cosmovisor `auto-download` enabled, make sure you remove the downloaded binary from `data/test/val1/cosmovisor/upgrades/Vega` and `data/test/val2/cosmovisor/upgrades/Vega`.
-3. Also remove the symbolic link with `rm data/test/val1/cosmovisor/current` and `rm data/test/val2/cosmovisor/current`.
+2. If you ran the upgrade successfully with cosmovisor `auto-download` enabled, make sure that you remove the downloaded binary from `data/test/val1/cosmovisor/upgrades/Vega` and `data/test/val2/cosmovisor/upgrades/Vega`. Also remove the symbolic link with `rm data/test/val1/cosmovisor/current` and `rm data/test/val2/cosmovisor/current`.
 Now you should be able to start the two binaries again and perform the upgrade from the start.
 
 ## Further info: test new modules
