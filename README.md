@@ -213,9 +213,9 @@ Alternatively, by using the auto-download setup from method II, node runners do 
 - For the Vega upgrade, Gaia will upgrade its dependency on Cosmos SDK v0.42 to Cosmos SDK v0.44, this will require [Cosmovisor v0.1](https://github.com/cosmos/cosmos-sdk/releases/tag/cosmovisor%2Fv0.1.0). Later versions of Cosmovisor do not support Cosmos SDK v0.42 or earlier if the auto-download option is enabled.
 - By using Cosmovisor v0.1 you might experience a [node hanging issue](https://github.com/cosmos/cosmos-sdk/issues/9875) when querying a result with a large output size. For example, `gaiad q gov proposals` will hang the node being queried, this issue will not appear for Cosmovisor versions newer than v0.1.
 
-#### method I: manually prepare the new binary
-##### method I: set cosmosvisor
-create the folder for cosmosvisor for val1 and val2, and put the old binary in `cosmovisor/genesis/bin`.
+#### Method I: manually prepare the new binary
+##### Method I: setup Cosmosvisor
+Create the Cosmovisor folders for validator 1 and validator 2, and put the old binary in `cosmovisor/genesis/bin`.
 ```shell
 mkdir -p $VAL_1_CHAIN_DIR/cosmovisor/genesis/bin
 mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/genesis/bin
