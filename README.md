@@ -39,7 +39,7 @@ cat genesis.json | shasum -a 256
 86f29f23f9df51f5c58cb2c2f95e263f96f123801fc9844765f98eca49fe188f
 ```
 
-Change one validator in the genesis file to be a validator that you have the private key  and make this validator own over 67% power, so that you can start a local chain to produce blocks.
+Change one validator in the genesis file to be an account that you have the private key for, and make this validator own over 67% power, so that you can start to produce blocks on a local chain.
 
 #### Change the addresses and keys
 ```shell
