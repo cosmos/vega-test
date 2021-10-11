@@ -361,7 +361,7 @@ gaiad tx gov submit-proposal software-upgrade Vega \
 --yes
 ```
 ##### Method II: Vote
-open a new terminal to vote by user.
+Open a new terminal to vote by user.
 ```shell
 cd vega-test
 gaiad tx gov vote 54 yes \
