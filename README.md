@@ -90,9 +90,9 @@ sed -i '' 's%277834757180509%6277834757180509%g' genesis.json
 sed -i '' 's%194616098248861%6194616098248861%g' genesis.json
 ```
 
-#### Modify some gov parameters for test efficiency
+#### Modify some gov parameters to improve testing efficiency
 
-Change the minimum deposit amount, quorum, threshold, and voting period.Those changes can get the user account (who is also a delegator)'s vote pass when voting for the upgrade proposal.
+Change the minimum deposit amount, quorum, threshold, and voting period. These changes will allow the user account's vote to pass when voting for the upgrade proposal, because they are also a delegator.
 ```shell
 # min deposition amount
 sed -i '' 's%"amount": "64000000",%"amount": "1",%g' genesis.json
