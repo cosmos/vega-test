@@ -254,7 +254,7 @@ export DAEMON_RESTART_AFTER_UPGRADE=true
 cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
 ```
 ##### Method I: propose upgrade
-The user owns by val2 is a delegator. So user can vote. Since we changed the gov parameters, the delegations this user delegated are far enough for this proposal to pass.
+The user delegated to Validator 2 controls over 67% of the voting power. Normally a validator votes with the accumulated amount of stake from all delegators. But a user can also independently vote, and since this user is a whale, its vote will make any proposal pass.
 ```shell
 cosmovisor tx gov submit-proposal software-upgrade Vega \
 --title Vega \
