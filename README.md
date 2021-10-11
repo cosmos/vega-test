@@ -206,12 +206,12 @@ Method I requires node runners to manually build the old and new binary and put 
         └── upgrade-info.json
 ```
 
-By using auto-download setup (Method II), node runners do not need to prepare the new binaries manually. When propose upgrade, the `--upgrade-info` should include a link of the new binary. The environmental variable `DAEMON_ALLOW_DOWNLOAD_BINARIES` is set to be true.  Upon the upgrade height, if cosmovisor cannot find the new binnary locally, cosmovisor will download the new binary according to the instruction in the `upgrade-info.json`(this `data/up-grade-info.json` file is generated upon upgrade) and put the new binary in `cosmovior/upgrade/Vega/bin` and switch to run the new binary.
+Alternatively, by using the auto-download setup from method II, node runners do not need to prepare the new binaries manually. When proposing a new upgrade, the `--upgrade-info` flag should include a link of the new binary. The environmental variable `DAEMON_ALLOW_DOWNLOAD_BINARIES` is set to be true. Upon the upgrade height, if Cosmovisor cannot find the new binary locally, it will begin downloading the new binary according to the instructions found in `data/upgrade-info.json`(which is generated upon upgrade). After this it puts the new binary in `cosmovior/upgrade/Vega/bin` and starts running it.
 
 *Note:*
-- In general, autodownload is not recommended, especially when the validators are not able to confirm the links are secure and correct.
-- For Vega upgrade, gaia will upgrade its dependency on  Cosmos SDK v0.42 to Cosmos SDK v0.44, this will require [Cosmovisor v0.1](https://github.com/cosmos/cosmos-sdk/releases/tag/cosmovisor%2Fv0.1.0). Later versions of cosmovisor do not support Cosmos SDK v0.42 or earlier if the auto-download option is enabled.
-- by using cosmovisor v0.1 you might have [node hanging issue](https://github.com/cosmos/cosmos-sdk/issues/9875) when query a result of large output size. For example, `gaiad q gov proposals` will hang the node being queried, this issue will not appear for cosmovisor versions later than v0.1.
+- In general, auto-download comes with the risk that the verification of correct download is done automatically. If you want to have the highest guarantee you should confirm the check-sum manually. We hope more node operators will use the auto-download for this release but please be aware this is a risk you should take at your own discretion.
+- For the Vega upgrade, Gaia will upgrade its dependency on Cosmos SDK v0.42 to Cosmos SDK v0.44, this will require [Cosmovisor v0.1](https://github.com/cosmos/cosmos-sdk/releases/tag/cosmovisor%2Fv0.1.0). Later versions of Cosmovisor do not support Cosmos SDK v0.42 or earlier if the auto-download option is enabled.
+- By using Cosmovisor v0.1 you might experience a [node hanging issue](https://github.com/cosmos/cosmos-sdk/issues/9875) when querying a result with a large output size. For example, `gaiad q gov proposals` will hang the node being queried, this issue will not appear for Cosmovisor versions newer than v0.1.
 
 #### method I: manually prepare the new binary
 ##### method I: set cosmosvisor
