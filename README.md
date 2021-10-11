@@ -188,8 +188,11 @@ sed -i '' '/Enable defines if the Rosetta API server/,/Address defines the Roset
 sed -i '' '/Enable defines if the Rosetta API server/,/Address defines the Rosetta API server/s/enable = true/enable = false/' $VAL_2_CHAIN_DIR/config/app.toml
 ```
 ### Cosmosvisor
-Here we will show you two ways of using cosmovisor to upgrade: with manually prepare the new binary (method I) and with [auto-download](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor#auto-download) the new binary(method II).
-Method I requires node runners manually build the old and new binary and put them  into right dir in `cosmovisor` folder (as shown below). Then cosmovisor will switch to the new binary upon upgrade height.
+Here we will show you two ways of using Cosmovisor to upgrade: 
+I. by manually preparing the new binary
+II. by [auto-downloading](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor#auto-download) the new binary.
+
+Method I requires node runners to manually build the old and new binary and put them into the `cosmovisor` folder (as shown below). Cosmovisor will then switch to the new binary upon upgrade height.
 ```shell
 .
 ├── current -> genesis or upgrades/<name>
