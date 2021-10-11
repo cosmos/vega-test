@@ -4,8 +4,8 @@ This document describes the  procedures to test cosmoshub Vega upgrade locally.
 This upgrade will bring the new release of Cosmos-SDK v0.44.0 and IBC 1.0-RC6 into gaia.
 
 ## Version
-- presently running cosmoshub-4, Gaia version: v5.0.5
-- going to upgrade to cosmoshub-4, Gaia version: v6.0.0
+- Currently: running cosmoshub-4, Gaia version: v5.0.5
+- After the upgrade: cosmoshub-4, Gaia version: v6.0.0
 
 ## Chain upgrade by cosmovisor
 
