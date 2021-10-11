@@ -236,7 +236,7 @@ mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/upgrades/Vega/bin
 ```
-##### method I: start cosmovisor
+##### Method I: start Cosmovisor
 For val1:
 ```shell
 export DAEMON_NAME=gaiad
@@ -271,7 +271,7 @@ cosmovisor tx gov submit-proposal software-upgrade Vega \
 --yes
 ```
 ##### Method I: Vote
-open a new terminal to vote by user.
+Open a new terminal to vote by user.
 ```shell
 cd vega-test
 gaiad tx gov vote 54 yes \
@@ -283,12 +283,12 @@ gaiad tx gov vote 54 yes \
 --yes
 ```
 
-after voting period finishes, check the vote result by
+After the voting period finishes, check the vote result by using:
 
 ```shell
 $BINARY query gov proposal 54
 ```
-the proposal status should be `PROPOSAL_STATUS_PASSED`.
+The proposal status should be `PROPOSAL_STATUS_PASSED`.
 ```shell
 content:
   '@type': /cosmos.upgrade.v1beta1.SoftwareUpgradeProposal
@@ -315,20 +315,20 @@ total_deposit:
 voting_end_time: ""
 voting_start_time: ""
 ```
-After `PROPOSAL_STATUS_PASSED`, wait till the upgrade height is reached and comovisor will apply upgrade.
+After `PROPOSAL_STATUS_PASSED`, wait until the upgrade height is reached, Cosmovisor will now apply the upgrade.
 
 #### Method II: auto-download the new binary
-##### method II: set cosmosvisor
+##### Method II: setup Cosmosvisor
 
-Create the folder for cosmosvisor for val1 and val2, and put the old binary in `cosmovisor/genesis/bin`.
+Create the Cosmovisor folder for for validator 1 and validator 2, and put the old binary in `cosmovisor/genesis/bin`.
 ```shell
 mkdir -p $VAL_1_CHAIN_DIR/cosmovisor/genesis/bin
 mkdir -p $VAL_2_CHAIN_DIR/cosmovisor/genesis/bin
 cp $(which gaiad) $VAL_1_CHAIN_DIR/cosmovisor/genesis/bin
 cp $(which gaiad) $VAL_2_CHAIN_DIR/cosmovisor/genesis/bin
 ```
-##### method II: start cosmovisor
-For val1:
+##### Method II: start Cosmovisor
+For validator 1:
 ```shell
 export DAEMON_NAME=gaiad
 export DAEMON_HOME= $(pwd)/$VAL_1_CHAIN_DIR
@@ -336,7 +336,7 @@ export DAEMON_RESTART_AFTER_UPGRADE=true
 export DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_1_CHAIN_DIR
 ```
-For val2:
+For validator 2:
 
 open a new terminal:
 ```shell
@@ -347,7 +347,7 @@ export DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
 ```
 ##### Method II: propose upgrade
-With auto-download enabled, we can propose upgrade with the `upgrade-info` containing links to the new binaries from the [github releases](https://github.com/cosmos/gaia/releases). If you want to make sure that the binary downloaded is absolutely correct, it is good to do your own checksum validation.
+With auto-download enabled, we can propose our upgrade with the `--upgrade-info` flag containing links to the new binaries from the [github releases](https://github.com/cosmos/gaia/releases). If you want to make sure that the binary downloaded is absolutely correct, we recommend you do your own checksum validation.
 ```shell
 gaiad tx gov submit-proposal software-upgrade Vega \
 --title Vega \
@@ -380,7 +380,7 @@ After the voting period finishes, check the vote result by:
 ```shell
 $BINARY query gov proposal 54
 ```
-the proposal status should be `PROPOSAL_STATUS_PASSED`.
+The proposal status should now be `PROPOSAL_STATUS_PASSED`.
 ```shell
 content:
   '@type': /cosmos.upgrade.v1beta1.SoftwareUpgradeProposal
@@ -408,38 +408,38 @@ voting_end_time: ""
 voting_start_time: ""
 ```
 
-After `PROPOSAL_STATUS_PASSED`, wait till the upgrade height is reached and comovisor will auto-download the new binary fitting your platform and apply upgrade. Please note, the link of binary for GOOS=darwin GOARCH=arm64(for mac M1 users) is from this repo, not from our releases (presently we do not provide binary for this platform in our release).
+After `PROPOSAL_STATUS_PASSED`, wait until the upgrade height is reached. Cosmovisor will now auto-download the new binary specific to your platform and apply the upgrade. Please note, the link of the binary for GOOS=darwin GOARCH=arm64 (for mac M1 users) is from this repo, not from our releases (we do not currently provide binaries for this platform in our release).
 
 ## Upgrade result
 ### Method I:
-When the upgrade height is reached, you can find info. in the log:  `ERR UPGRADE "Vega" NEEDED at height: 7368587: upgrade to Vega` and `applying upgrade "Vega" at height:7368587`. Then the chain will progress to produce blocks after both nodes upgrade.
+When the upgrade block height is reached, you can find the following information in the log: `ERR UPGRADE "Vega" NEEDED at height: 7368587: upgrade to Vega` and `applying upgrade "Vega" at height:7368587`. The chain will continue to produce blocks after both nodes have completed the upgrade.
 ### Method II:
-When the upgrade height is reached, you can find info. in the log: `INF applying upgrade "Vega" at height: 7368587`. Then chain will progress to produce blocks after both nodes upgrade.
+When the upgrade block height is reached, you can find the following information in the log: `INF applying upgrade "Vega" at height: 7368587`. The chain will continue to produce blocks after both nodes have completed the upgrade.
 
 ## Repeating the test
 
 If you want to try running the test again, or if you made a mistake while running it the first time, make sure to do the following steps:
 
 1. `cd vega-test`,`gaiad unsafe-reset-all --home data/test/val1` and `gaiad unsafe-reset-all --home data/test/val2`
-2. If you ran the upgrade successfully with cosmovisor `auto-download` enabled, make sure that you remove the downloaded binary from `data/test/val1/cosmovisor/upgrades/Vega` and `data/test/val2/cosmovisor/upgrades/Vega`. Also remove the symbolic link with `rm data/test/val1/cosmovisor/current` and `rm data/test/val2/cosmovisor/current`.
+2. If you ran the upgrade successfully with the Cosmovisor `--auto-download` flag enabled, make sure that you remove the downloaded binary from `data/test/val1/cosmovisor/upgrades/Vega` and `data/test/val2/cosmovisor/upgrades/Vega`. Also remove the symbolic link with `rm data/test/val1/cosmovisor/current` and `rm data/test/val2/cosmovisor/current`.
 Now you should be able to start the two binaries again and perform the upgrade from the start.
 
 ## Further info: test new modules
-Now you can explore the functions of new modules in gaia.
-For authz module, you can refer https://github.com/cosmos/sdk-tutorials/pull/786/files for further testing.
+Now you can explore some of the functions of the new modules in Gaia.
+For the AuthZ module, please refer to https://docs.cosmos.network/master/modules/authz/
 
 ## Reference
 
-[cosmovisor quick start](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor)
+[Cosmovisor quick start](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor)
 
-[changelog of cosmos-sdk v0.43.0](https://github.com/cosmos/cosmos-sdk/blob/v0.43.0/CHANGELOG.md#v0430---2021-08-10)
+[Changelog of cosmos-sdk v0.43.0](https://github.com/cosmos/cosmos-sdk/blob/v0.43.0/CHANGELOG.md#v0430---2021-08-10) and [Changelog of cosmos-sdk v0.44.0](https://github.com/cosmos/cosmos-sdk/blob/v0.44.0/CHANGELOG.md#v0440---2021-09-01) and [v0.44.1](https://github.com/cosmos/cosmos-sdk/blob/v0.44.1/CHANGELOG.md#v0441---2021-09-29)
 
-[cosmos/ibc-go v1.0.0](https://github.com/cosmos/ibc-go/tree/v1.0.0)
+[cosmos/ibc-go v1.2.1](https://github.com/cosmos/ibc-go/tree/v1.2.1)
 
 [Gravity DEX Upgrade Simulation Test](https://github.com/b-harvest/gravity-dex-upgrade-test/blob/kogisin/v5.0.5-upgrade-simulation/v5.0.5/README.md)
 
-[cosmovisor](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor)
-## changes in genesis file
+[Cosmovisor](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor)
+## Changes in the genesis file
 
 ```diff
 @@ -229195,10 +229195,10 @@
