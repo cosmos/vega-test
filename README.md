@@ -372,7 +372,7 @@ gaiad tx gov vote 54 yes \
 --node tcp://127.0.0.1:36657 
 --yes
 ```
-after voting period finishes, check the vote result by
+After the voting period finishes, check the vote result by:
 
 ```shell
 $BINARY query gov proposal 54
