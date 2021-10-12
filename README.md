@@ -46,12 +46,12 @@ Change one validator in the genesis file to be an account that you have the priv
 # change chain id
 sed -i '' 's%"chain_id": "cosmoshub-4",%"chain_id": "test",%g' genesis.json
 
-# substitue "Certus One", this is our  node1, you can find the key info. in priv_validator_key_val1.json in this repo.
+# substitute "Certus One", this is our  node1, you can find the key info. in priv_validator_key_val1.json in this repo.
 sed -i '' 's%cOQZvh/h9ZioSeUMZB/1Vy1Xo5x2sjrVjlE/qHnYifM=%qwiUMxz3llsy45fPvM0a8+XQeAJLvrX3QAEJmRMEEoU=%g' genesis.json
 sed -i '' 's%B00A6323737F321EB0B8D59C6FD497A14B60938A%D5AB5E458FD9F9964EF50A80451B6F3922E6A4AA%g' genesis.json
 sed -i '' 's%cosmosvalcons1kq9xxgmn0uepav9c6kwxl4yh599kpyu28e7ee6%cosmosvalcons16k44u3v0m8uevnh4p2qy2xm08y3wdf92xsc3ve%g' genesis.json
 
-# substitue "Binance Staking", this is our node2, also the validator who will own over 67% power. you can find the key info. in priv_validator_key_val1.json in this repo. 
+# substitute "Binance Staking", this is our node2, also the validator who will own over 67% power. you can find the key info. in priv_validator_key_val1.json in this repo. 
 # tendermint pub_key
 sed -i '' 's%W459Kbdx+LJQ7dLVASW6sAfdqWqNRSXnvc53r9aOx/o=%oi55Dw+JjLQc4u1WlAS3FsGwh5fd5/N5cP3VOLnZ/H0=%g' genesis.json
 # priv_val address
