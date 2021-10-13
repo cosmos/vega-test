@@ -22,7 +22,7 @@ You can continue using the same account and validator key as the one you're usin
 
 ### Public testnet Chain-ID
 
-`cosmoshub-4-vega-testnet-001`
+`vega-testnet`
 
 ### Genesis File
 
