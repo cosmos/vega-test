@@ -1,7 +1,9 @@
-# Cosmos-Hub Vega  Upgrade Local Testnet Instruction
+# Cosmos-Hub Vega Upgrade Local Testnet Instruction
 
 This document describes the process on how to test the Cosmos Hub Vega upgrade locally.
 This upgrade will integrate the new release of Cosmos-SDK v0.44.2 and IBC 1.2.1 into Gaia.
+
+To join the public testnet for the vega upgrade, please follow these [instructions](public-testnet-readme.md).
 
 ## Version
 - Currently: running cosmoshub-4, Gaia version: v5.0.5
