@@ -24,9 +24,10 @@ sed -i '' 's%cosmosvalcons1lrqpcp5p2792wqxhxmt8tjveypjlvh378gkddu%cosmosvalcons1
 
 # substitute the faucet-user, faucet-user delegates to binance
 sed -i '' 's%cosmos1z98eg2ztdp2glyla62629nrlvczg8s7f0tm3dx%cosmos10aak94tfdl3pgt8qe6ga75qh3zkf3anpq8aqg0%g' genesis.json &&
+sed -i '' 's%A6apc7iThbRkwboKqPy6eXxxQvTH+0lNkXZvugDM9V4g%A81DhG/5sB6RA8dl/6jtmX0svTc0xJL5NjPPI/q4jJWP%g' genesis.json
+
 # fix faucet-user's balance, increase to 300,000,000
 sed -i '' 's%"amount": "72177323"% "amount": "372177323"%g' genesis.json &&
-
 
 
 # change one delegator's delegation. This delegator delegates to our val1(Binance Staking). Increase this stake by 6,000,000,000,000,000.
