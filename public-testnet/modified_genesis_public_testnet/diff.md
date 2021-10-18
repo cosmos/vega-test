@@ -1,5 +1,4 @@
---- genesis.json	2021-10-13 19:25:42.000000000 +0200
-+++ public-testnet/modified_genesis_public_testnet/genesis.json	2021-10-18 10:32:51.000000000 +0200
+``` diff
 @@ -687,10 +687,10 @@
          {
            "@type": "/cosmos.auth.v1beta1.BaseAccount",
@@ -247,3 +246,4 @@
        }
      },
      {
+```
