@@ -1,3 +1,4 @@
+The difference between original exported geneisis and the modified geneisis for public testnet:
 ``` diff
 @@ -687,10 +687,10 @@
          {
