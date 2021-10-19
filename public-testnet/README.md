@@ -1,6 +1,6 @@
 # Cosmos-Hub Vega Upgrade Public Testnet Instructions
 
-We are running a public testnet for the Vega upragde. All Cosmos Hub validators are invited to participate in the public testnet. In addition, we are providing a few public endpoints for testing integrations.
+We are running a public testnet for the Vega upgrade. All Cosmos Hub validators are invited to participate in the public testnet. In addition, we are providing a few public endpoints for testing integrations.
 
 We are also available on the `#validators-verified` channel in the [Cosmos Developers discord](https://discord.gg/cosmosnetwork) for support.
 
