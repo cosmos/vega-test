@@ -5,7 +5,7 @@ We are running a public testnet for the Vega upgrade. All Cosmos Hub validators 
 We are also available on the `#validators-verified` channel in the [Cosmos Developers discord](https://discord.gg/cosmosnetwork) for support.
 
 ## Joining as a validator
-You can continue using the same account and validator key as the one you're using for `cosmoshub-4`. If you'd like to request testnet ATOMs for delegation, please make an issue with your delegator account information.
+You can continue using the same account and validator key as the one you're using for `cosmoshub-4`. If you'd like to **request testnet ATOMs from the faucet** for delegation, please make an issue with your delegator account information.
 
 ## Schedule 🗓️ 
 
@@ -13,10 +13,10 @@ You can continue using the same account and validator key as the one you're usin
 
 | Date                       | Testnet plan                |
 | -------------------------- | --------------------------- |
-| Thursday, October 20 2021  | Launch testnet chain with Gaia v5 |
-| Wednesday, October 21 2021 | Submit software upgrade proposal            |
-| Thursday, October 22 2021  | Voting ends                 |
-| Friday, October 23 2021    | Vega upgrade is live on the testnet |
+| October 20 2021  | Launch testnet chain with Gaia v5 |
+| October 21 2021 | Submit software upgrade proposal            |
+| October 22 2021  | Voting ends                 |
+| October 23 2021    | Vega upgrade is live on the testnet |
 
 ## Configuring your full node 🎛️
 
@@ -38,7 +38,7 @@ The `sha256sum` for the modified genesis file is `TODO`.
 | HYPHA "Certus-one"  | `1edc806e29bfb380dc0298ce4fded8e3e8554e2a` | `198.50.215.1` | p2p: `36656`, rpc: `36657`, api: `3327`, grpc: `3080` |
 | Interchain "Binance" Sentry | `TODO` | `TODO` | p2p: `26656 `, rpc: `26657 ` , api: `1317 `, grpc: `9090` |
 
-#### Minimum gas
+### Minimum gas
 Please use `minimum-gas-prices = 0.001uatom` in your `config.toml`
 
 ## Doing the upgrade 
