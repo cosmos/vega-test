@@ -10,7 +10,6 @@ sed -i '' 's%83F47D7747B0F633A6BA0DF49B7DCF61F90AA1B0%7C9F0FADF306FED9663F811619
 sed -i '' 's%cosmosvalcons1s0686a68krmr8f46ph6fklw0v8us4gdsm7nhz3%cosmosvalcons10j0slt0nqmldje3lsytpj9qlny28ueezg92w6g%g' genesis.json &&
 
 
-
 # substitute "Certus One", this is our  val2
 sed -i '' 's%cOQZvh/h9ZioSeUMZB/1Vy1Xo5x2sjrVjlE/qHnYifM=%p6ihCq31IZUeY6z00G9ROoHTphnhi1J7wFrZ+5F2epU=%g' genesis.json &&
 sed -i '' 's%B00A6323737F321EB0B8D59C6FD497A14B60938A%17472F7923685922F8165C33F4E02176189AF253%g' genesis.json &&
@@ -22,16 +21,17 @@ sed -i '' 's%NK3/1mb/ToXmxlcyCK8HYyudDn4sttz1sXyyD+42x7I=%un9hBl/53UOx5oFOu7+eOY
 sed -i '' 's%F8C01C0681578AA700D736D675C9992065F65E3E%132BAA3FAD92DDB2A23BB1FC8144F2D04F16DCC8%g' genesis.json &&
 sed -i '' 's%cosmosvalcons1lrqpcp5p2792wqxhxmt8tjveypjlvh378gkddu%cosmosvalcons1zv4650adjtwm9g3mk87gz38j6p83dhxgytprlj%g' genesis.json &&
 
+
 # substitute the faucet-user, faucet-user delegates to binance
-sed -i '' 's%cosmos1z98eg2ztdp2glyla62629nrlvczg8s7f0tm3dx%cosmos10aak94tfdl3pgt8qe6ga75qh3zkf3anpq8aqg0%g' genesis.json &&
-sed -i '' 's%A6apc7iThbRkwboKqPy6eXxxQvTH+0lNkXZvugDM9V4g%A81DhG/5sB6RA8dl/6jtmX0svTc0xJL5NjPPI/q4jJWP%g' genesis.json
+sed -i '' 's%cosmos1qq9ydrjeqalqa3zyqqtdczvuugsjlcc3c7x4d4%cosmos10aak94tfdl3pgt8qe6ga75qh3zkf3anpq8aqg0%g' genesis.json &&
+sed -i '' 's%AjEkAHzQakRnyUppiM5/hnA6h2D7NkdxExxgiCG+NiDh%A81DhG/5sB6RA8dl/6jtmX0svTc0xJL5NjPPI/q4jJWP%g' genesis.json
 
 # fix faucet-user's balance, increase to 300,000,000
-sed -i '' 's%"amount": "72177323"% "amount": "372177323"%g' genesis.json &&
+sed -i '' 's%"amount": "160896"%"amount": "300160896"%g' genesis.json &&
 
 
-# change one delegator's delegation. This delegator delegates to our val1(Binance Staking). Increase this stake by 6,000,000,000,000,000.
-sed -i '' 's%"25390741.000000000000000000"%"6000000025390741.000000000000000000"%g' genesis.json &&
+# change one delegator's(cosmos1qq9ydrjeqalqa3zyqqtdczvuugsjlcc3c7x4d4) delegation. This delegator delegates to our val1(Binance Staking). Increase this stake by 6,000,000,000,000,000.
+sed -i '' 's%"11316631.000000000000000000"%"6000000011316631.000000000000000000"%g' genesis.json &&
 
 # fix power of the validator
 # Binance Staking validator's "delegator_shares" and "tokens"
