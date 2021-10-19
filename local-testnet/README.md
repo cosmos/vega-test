@@ -187,7 +187,7 @@ Disable the Rosetta API server:
 sed -i '' '/Enable defines if the Rosetta API server/,/Address defines the Rosetta API server/s/enable = true/enable = false/' $VAL_1_CHAIN_DIR/config/app.toml
 sed -i '' '/Enable defines if the Rosetta API server/,/Address defines the Rosetta API server/s/enable = true/enable = false/' $VAL_2_CHAIN_DIR/config/app.toml
 ```
-### Cosmosvisor
+### Cosmovisor
 Here we will show you two ways of using Cosmovisor to upgrade:
 I. by manually preparing the new binary
 II. by [auto-downloading](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor#auto-download) the new binary.
