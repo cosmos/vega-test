@@ -21,5 +21,3 @@ You can run a local testnet with a modified exported genesis file. Find detailed
 
 ### Public testnet
 We're inviting the community to participate in a public testnet for the Vega upgrade. Follow the instructions in [public-testnet/README.md](public-testnet/README.md).
-
-This repo provides a replaced genesis file which can be directly used as a genesis to run a node in testnet. This genesis file is modified from a genesis file exported from cosmoshub-4 ([genesis.json.gz](genesis.json.gz)) by the commands in [public-testnet/replace_ref.sh](public-testnet/replace_ref.sh).
