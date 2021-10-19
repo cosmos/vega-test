@@ -1,15 +1,25 @@
-# Cosmos-Hub Vega  Upgrade Testnet Instruction
+# Cosmos-Hub Vega Upgrade Testnet Instructions
 
-This repo provides instructions and files that help users to test vega upgrade locally or in the public testnet.
-This upgrade will integrate the new release of Cosmos-SDK v0.44.2 and IBC 1.2.1 into Gaia.
+This repository provides instructions and files to help test the Cosmos Hub Vega upgrade locally or with a public testnet.
 
-## Version
-- Currently: running cosmoshub-4, Gaia version: v5.0.5
-- After the upgrade: cosmoshub-4, Gaia version: v6.0.0
+This Vega upgrade will integrate new releases of Cosmos-SDK v0.44.2 and IBC 1.2.1 into Gaia.
 
-### Local testnet
-This repo provides a detailed instruction for how to conduct a local testnet, and a modified genesis file if users do not want to replace the genesis data themselves as instructed in the `local-testnet/README.md`.
+## Versions
+For the testnet instructions in this repository, we'll be running with the following versions:
 
+- **Before the upgrade:** Chain ID `cosmoshub-4`, Gaia version `v5.0.5`
+- **After the upgrade:** Chain ID `cosmoshub-4`, Gaia version: `v6.0.0-rc2`
+
+Note that the Chain ID will not change after the upgrade.
+
+## Testnets 🎛️ 
+
+You can test out the upgrade locally or join us on the public testnet.
+
+### Local testnet 
+You can run a local testnet with a modified exported genesis file. Find detailed instructions in [local-testnet/README.md](local-testnet/README.md). You can either modify the genesis file yourself by following the readme or use the modified genesis file we've [prepared](local-testnet/modified_genesis_local_testnet/genesis.json.gz).
 
 ### Public testnet
-This repo provides a replaced genesis file which can be directly used as a genesis to run a node in testnet. This genesis file is modified from a genesis file exported from cosmoshub-4 (`original_genesis/genesis.json.gz`) by the commands in `public_testnet/replace_ref.sh`.
+We're inviting the community to participate in a public testnet for the Vega upgrade. Follow the instructions in [public-testnet/README.md](public-testnet/README.md).
+
+This repo provides a replaced genesis file which can be directly used as a genesis to run a node in testnet. This genesis file is modified from a genesis file exported from cosmoshub-4 ([genesis.json.gz](genesis.json.gz)) by the commands in [public-testnet/replace_ref.sh](public-testnet/replace_ref.sh).
