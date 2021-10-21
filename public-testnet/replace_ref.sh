@@ -16,7 +16,7 @@ sed -i '' 's%B00A6323737F321EB0B8D59C6FD497A14B60938A%17472F7923685922F8165C33F4
 sed -i '' 's%cosmosvalcons1kq9xxgmn0uepav9c6kwxl4yh599kpyu28e7ee6%cosmosvalcons1zarj77frdpvj97qktselfcppwcvf4ujn35a2ps%g' genesis.json &&
 
 
-# substitute "Coinbase Custody", this is our  val2
+# substitute "Coinbase Custody", this is our  val3
 sed -i '' 's%NK3/1mb/ToXmxlcyCK8HYyudDn4sttz1sXyyD+42x7I=%un9hBl/53UOx5oFOu7+eOY1C0wOsdoVDfUW5VCH8TyA=%g' genesis.json &&
 sed -i '' 's%F8C01C0681578AA700D736D675C9992065F65E3E%132BAA3FAD92DDB2A23BB1FC8144F2D04F16DCC8%g' genesis.json &&
 sed -i '' 's%cosmosvalcons1lrqpcp5p2792wqxhxmt8tjveypjlvh378gkddu%cosmosvalcons1zv4650adjtwm9g3mk87gz38j6p83dhxgytprlj%g' genesis.json &&
@@ -26,8 +26,8 @@ sed -i '' 's%cosmosvalcons1lrqpcp5p2792wqxhxmt8tjveypjlvh378gkddu%cosmosvalcons1
 sed -i '' 's%cosmos1qq9ydrjeqalqa3zyqqtdczvuugsjlcc3c7x4d4%cosmos10aak94tfdl3pgt8qe6ga75qh3zkf3anpq8aqg0%g' genesis.json &&
 sed -i '' 's%AjEkAHzQakRnyUppiM5/hnA6h2D7NkdxExxgiCG+NiDh%A81DhG/5sB6RA8dl/6jtmX0svTc0xJL5NjPPI/q4jJWP%g' genesis.json
 
-# fix faucet-user's balance, increase to 300,000,000
-sed -i '' 's%"amount": "160896"%"amount": "300160896"%g' genesis.json &&
+# fix faucet-user's balance, increase by 300,000,000,000,000 uatom
+sed -i '' 's%"amount": "160896"%"amount": "300000000160896"%g' genesis.json &&
 
 
 # change one delegator's(cosmos1qq9ydrjeqalqa3zyqqtdczvuugsjlcc3c7x4d4) delegation. This delegator delegates to our val1(Binance Staking). Increase this stake by 6,000,000,000,000,000.
@@ -45,7 +45,7 @@ sed -i '' 's%"power": "13944328"%"power": "6013944328"%g' genesis.json &&
 sed -i '' 's%"194616038"%"6194616038"%g' genesis.json &&
 
 # fix total supply of uatom
-sed -i '' 's%277834757180509%6277835057180509%g' genesis.json &&
+sed -i '' 's%277834757180509%6577834757180509%g' genesis.json &&
 
 # fix balance of bonded_tokens_pool module account
 # module account for recording Binance staking(val1)'s received delegations:
