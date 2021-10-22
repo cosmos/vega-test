@@ -28,7 +28,7 @@ You can continue using the same account and validator key as the one you're usin
 
 We're using a modified exported genesis file from `cosmoshub-4` where we take control over the Coinbase custody, Binance, and Certus One validator accounts to be able to continue producing blocks. You can either modify your own genesis file using the [replace_ref.sh](replace_ref.sh) script or you can download our prepared genesis file from [here](modified_genesis_public_testnet/genesis.json.gz.)
 
-The `sha256sum` for the modified genesis file is `TODO`.
+The `sha256sum` for the modified genesis file is `89d1cb03d1dbe4eb803319f36f119651457de85246e185d6588a88e9ae83f386`.
 
 ### Peers and endpoints
 
@@ -39,7 +39,7 @@ The `sha256sum` for the modified genesis file is `TODO`.
 | Interchain "Binance" Sentry | `66a9e52e207c8257b791ff714d29100813e2fa00` | `143.244.151.9` | p2p: `26656 `, rpc: `26657 ` , api: `1317 `, grpc: `9090` |
 
 ### Minimum gas
-Please use `minimum-gas-prices = 0.001uatom` in your `config.toml`
+Please use `minimum-gas-prices = 1uatom` in your `app.toml`
 
 ## Doing the upgrade 
 
