@@ -408,7 +408,7 @@ voting_end_time: ""
 voting_start_time: ""
 ```
 
-After `PROPOSAL_STATUS_PASSED`, wait until the upgrade height is reached. Cosmovisor will now auto-download the new binary specific to your platform and apply the upgrade. Please note, the link of the binary for GOOS=darwin GOARCH=arm64 (for mac M1 users) is from this repo, not from our releases (we do not currently provide binaries for this platform in our release).
+After `PROPOSAL_STATUS_PASSED`, wait until the upgrade height is reached. Cosmovisor will now auto-download the new binary specific to your platform and apply the upgrade. Please note, the upgrade info in method II does not contain the download link of the binary for GOOS=darwin GOARCH=arm64 (for mac M1 users), please use method I to upgrade.
 
 ## Upgrade result
 ### Method I:
