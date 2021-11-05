@@ -103,6 +103,15 @@ sed -i '' 's%"threshold": "0.500000000000000000",%"threshold": "0.00000000000000
 # voting period 
 sed -i '' 's%"voting_period": "1209600s"%"voting_period": "60s"%g' genesis.json
 ```
+<em>Please note: if you prefer not to replace the data in the genesis yourself as shown above, we have prepared a [modified genesis file](https://github.com/cosmos/vega-test/tree/master/local-testnet/modified_genesis_local_testnet) which can be directly used in local testnet.<em>
+
+```
+# verify the hash of the modified genesis:
+cat genesis.json | shasum -a 256
+> 
+7374ea0ccceead23ff1a02cf041f4bf53dc7fe21692d3511b8812668720b4b8e
+```
+
 ### Init the chain
 #### Setup the environmental variables
 ```shell
