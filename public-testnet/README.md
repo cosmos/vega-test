@@ -26,7 +26,7 @@ You can continue using the same account and validator key as the one you're usin
 
 ### Genesis file
 
-We're using a modified exported genesis file from `cosmoshub-4` where we take control over the Coinbase custody, Binance, and Certus One validator accounts to be able to continue producing blocks. You can either modify your own genesis file using the [replace_ref.sh](replace_ref.sh) script by modifying the [genesis file](../exported_unmodified_genesis.json.gz) here or you can download our prepared, modifieg genesis file from [here](modified_genesis_public_testnet/genesis.json.gz)
+We're using a modified exported genesis file from `cosmoshub-4` where we take control over the Coinbase custody, Binance, and Certus One validator accounts to be able to continue producing blocks. You can either use the [replace_ref.sh](replace_ref.sh) script to modify the [genesis file here](../exported_unmodified_genesis.json.gz) or you can download our prepared, modified genesis file from [here](modified_genesis_public_testnet/genesis.json.gz)
 
 The `sha256sum` for the modified genesis file is `89d1cb03d1dbe4eb803319f36f119651457de85246e185d6588a88e9ae83f386`.
 
