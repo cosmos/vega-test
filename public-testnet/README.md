@@ -13,10 +13,10 @@ You can continue using the same account and validator key as the one you're usin
 
 | Date                       | Testnet plan                |
 | -------------------------- | --------------------------- |
-| October 20 2021  | Launch testnet chain with Gaia v5 |
-| October 21 2021 | Submit software upgrade proposal            |
-| October 22 2021  | Voting ends                 |
-| October 23 2021    | Vega upgrade is live on the testnet |
+| November 5 2021  | Launch testnet chain with Gaia v5 (previous version)  |
+| November 10 2021 | Submit software upgrade proposal            |
+| November 11 2021  | Voting ends                 |
+| November 12 2021    | Vega upgrade (Gaia v6-rc2) is live on the testnet |
 
 ## Configuring your full node 🎛️
 
@@ -26,7 +26,7 @@ You can continue using the same account and validator key as the one you're usin
 
 ### Genesis file
 
-We're using a modified exported genesis file from `cosmoshub-4` where we take control over the Coinbase custody, Binance, and Certus One validator accounts to be able to continue producing blocks. You can either modify your own genesis file using the [replace_ref.sh](replace_ref.sh) script or you can download our prepared genesis file from [here](modified_genesis_public_testnet/genesis.json.gz.)
+We're using a modified exported genesis file from `cosmoshub-4` where we take control over the Coinbase custody, Binance, and Certus One validator accounts to be able to continue producing blocks. You can either modify your own genesis file using the [replace_ref.sh](replace_ref.sh) script or you can download our prepared genesis file from [here](modified_genesis_public_testnet/genesis.json.gz)
 
 The `sha256sum` for the modified genesis file is `89d1cb03d1dbe4eb803319f36f119651457de85246e185d6588a88e9ae83f386`.
 
@@ -39,8 +39,12 @@ The `sha256sum` for the modified genesis file is `89d1cb03d1dbe4eb803319f36f1196
 | Interchain "Binance" Sentry | `66a9e52e207c8257b791ff714d29100813e2fa00` | `143.244.151.9` | p2p: `26656 `, rpc: `26657 ` , api: `1317 `, grpc: `9090` |
 
 ### Minimum gas
-Please use `minimum-gas-prices = 1uatom` in your `app.toml`
+Please use `minimum-gas-prices = 0.001uatom` in your `app.toml`
 
 ## Doing the upgrade 
 
 To use Cosmovisor to manage your upgrade, please follow the [Cosmovisor instructions in the README for the local testnet](../local-testnet/README.md#Cosmovisor).
+
+Make sure your machine is resourced with 16GB while performing the upgrade. The upgrade process is memory intensive.
+
+**Note about auto-downloads:** If validators would like to enable the auto-download option (which we don't recommend), and they are currently running an application using Cosmos SDK v0.42, they will need to use Cosmovisor v0.1. Later versions of Cosmovisor do not support Cosmos SDK v0.42 or earlier if the auto-download option is enabled. Please note that with v0.1 you could face node hanging issues with your API server enabled as explained in this [issue](https://github.com/cosmos/cosmos-sdk/issues/9875).
