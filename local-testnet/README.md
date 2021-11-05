@@ -32,9 +32,9 @@ We have prepared a genesis file in this repo which was obtained by `gaiad export
 
 ```shell
 cd Vega-test
-gunzip genesis.json.gz
+gunzip exported_unmodified_genesis.json.gz
 # verify the hash
-cat genesis.json | shasum -a 256
+cat exported_unmodified_genesis.json | shasum -a 256
 > 
 86f29f23f9df51f5c58cb2c2f95e263f96f123801fc9844765f98eca49fe188f
 ```
