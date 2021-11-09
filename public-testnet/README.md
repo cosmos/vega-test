@@ -43,6 +43,10 @@ The `sha256sum` for the modified genesis file is `89d1cb03d1dbe4eb803319f36f1196
 ### Minimum gas
 Please use `minimum-gas-prices = 0.001uatom` in your `app.toml`
 
+### Invariant checks
+
+Please run with the `--x-crisis-skip-assert-invariants` flag. If you do check for invariants, you may see `rounding error withdrawing rewards from validator`. These are expected.
+
 ## Doing the upgrade 
 
 To use Cosmovisor to manage your upgrade, please follow the [Cosmovisor instructions in the README for the local testnet](../local-testnet/README.md#Cosmovisor).
