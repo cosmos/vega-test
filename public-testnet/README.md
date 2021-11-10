@@ -17,8 +17,8 @@ You can continue using the same account and validator key as the one you're usin
 | -------------------------- | --------------------------- |
 | November 8 2021  | Launch testnet chain with Gaia v5 (previous version)  |
 | November 11 2021 | Submit software upgrade proposal            |
-| November 11 2021  | Voting ends                 |
-| November 12 2021    | Vega upgrade (Gaia v6-rc2) is live on the testnet |
+| November 12 2021  | Voting ends                 |
+| November 13 2021    | Vega upgrade (Gaia v6-rc2) is live on the testnet |
 
 ## Configuring your full node 🎛️
 
