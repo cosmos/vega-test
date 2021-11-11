@@ -8,7 +8,7 @@ This Vega upgrade will integrate new releases of Cosmos-SDK v0.44.2 and IBC 1.2.
 For the testnet instructions in this repository, we'll be running with the following versions:
 
 - **Before the upgrade:** Chain ID `cosmoshub-4`, Gaia version `v5.0.5`
-- **After the upgrade:** Chain ID `cosmoshub-4`, Gaia version: [`v6.0.0-rc2`](https://github.com/cosmos/gaia/releases/tag/v6.0.0-rc2)
+- **After the upgrade:** Chain ID `cosmoshub-4`, Gaia version: [`v6.0.0-rc3`](https://github.com/cosmos/gaia/releases/tag/v6.0.0-rc3)
 
 Note that the Chain ID will not change after the upgrade.
 
