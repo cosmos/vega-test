@@ -18,7 +18,7 @@ You can continue using the same account and validator key as the one you're usin
 | November 8 2021  | Launch testnet chain with Gaia v5 (previous version)  |
 | November 11 2021 | Submit software upgrade proposal            |
 | November 12 2021  | Voting ends                 |
-| November 13 2021    | Vega upgrade (Gaia v6-rc2) is live on the testnet |
+| November 13 2021    | Vega upgrade (Gaia v6-rc3) is live on the testnet |
 
 ## Configuring your full node 🎛️
 
@@ -53,4 +53,4 @@ To use Cosmovisor to manage your upgrade, please follow the [Cosmovisor instruct
 
 Make sure your machine is resourced with 16GB while performing the upgrade. The upgrade process is memory intensive.
 
-**Note about auto-downloads:** If validators would like to enable the auto-download option (which we don't recommend), and they are currently running an application using Cosmos SDK v0.42, they will need to use Cosmovisor v0.1. Later versions of Cosmovisor do not support Cosmos SDK v0.42 or earlier if the auto-download option is enabled. Please note that with v0.1 you could face node hanging issues with your API server enabled as explained in this [issue](https://github.com/cosmos/cosmos-sdk/issues/9875). If your node is running on darwin, arm64 CPU architecture, please do not use cosmovisor auto-download because the upgrade proposal will not provide the binary download link for this architecture. Please prepare the new binary yourself from this [v6.0.0-rc2 tag](https://github.com/cosmos/gaia/tree/v6.0.0-rc2).
+**Note about auto-downloads:** If validators would like to enable the auto-download option (which we don't recommend), and they are currently running an application using Cosmos SDK v0.42, they will need to use Cosmovisor v0.1. Later versions of Cosmovisor do not support Cosmos SDK v0.42 or earlier if the auto-download option is enabled. Please note that with v0.1 you could face node hanging issues with your API server enabled as explained in this [issue](https://github.com/cosmos/cosmos-sdk/issues/9875). If your node is running on darwin, arm64 CPU architecture, please do not use cosmovisor auto-download because the upgrade proposal will not provide the binary download link for this architecture. Please prepare the new binary yourself from this [v6.0.0-rc3 tag](https://github.com/cosmos/gaia/tree/v6.0.0-rc3).
