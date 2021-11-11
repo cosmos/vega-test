@@ -357,12 +357,13 @@ cosmovisor start --x-crisis-skip-assert-invariants --home $VAL_2_CHAIN_DIR
 ```
 ##### Method II: propose upgrade
 With auto-download enabled, we can propose our upgrade with the `--upgrade-info` flag containing links to the new binaries from the [github releases](https://github.com/cosmos/gaia/releases). If you want to make sure that the binary downloaded is absolutely correct, we recommend you do your own checksum validation.
+
 ```shell
 gaiad tx gov submit-proposal software-upgrade Vega \
 --title Vega \
 --deposit 100uatom \
 --upgrade-height 7368587 \
---upgrade-info '{"binaries":{"linux/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc2/gaiad-v6.0.0-rc2-linux-amd64?checksum=sha256:373356d5a69687cf1b9cbdf392f85b645444e7e52b7cafb3b251d8dcba6ab4c6","linux/arm64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc2/gaiad-v6.0.0-rc2-linux-arm64?checksum=sha256:118dc95d048629d08da9abe687c630a4ffed91bdc0dc481f9e49bc3b592f3af7","darwin/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc2/gaiad-v6.0.0-rc2-darwin-amd64?checksum=sha256:b21720ac03eb1a07ed9a8278e8dcade2b207472947b2cdb5aefb78d93072316a","windows/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc2/gaiad-v6.0.0-rc2-windows-amd64.exe?checksum=sha256:79f45924c3a3ec623032bc4b8e9ac8ee32ce40c9ade12540adc5e8da429535ea"}}' \
+--upgrade-info '{"binaries":{"linux/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc3/gaiad-v6.0.0-rc3-linux-amd64?checksum=sha256:4b09b0466a6a8e1414e9f161b803023bec8c2fc8286bf1c4e4523a309e52a75c","linux/arm64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc3/gaiad-v6.0.0-rc3-linux-arm64?checksum=sha256:08b31fdd262d1576eae8bf0e7defb5ed680fafbf26bc85a1faec22c1e9d11a22","darwin/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc3/gaiad-v6.0.0-rc3-darwin-amd64?checksum=sha256:dddbaa50ab795e299ccb9f5bedab3f57965ab08d83103c5129bf7fc255950bb3","windows/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc3/gaiad-v6.0.0-rc3-windows-amd64.exe?checksum=sha256:e826dd52aee52e476da41b30fa488a50fa91b98e9937438eaa64d7b9cb4415dc"}}' \
 --description "upgrade to Vega" \
 --gas 400000 \
 --from user \
@@ -372,6 +373,7 @@ gaiad tx gov submit-proposal software-upgrade Vega \
 --node tcp://localhost:36657 \
 --yes
 ```
+
 ##### Method II: Vote
 Open a new terminal to vote by user.
 ```shell
