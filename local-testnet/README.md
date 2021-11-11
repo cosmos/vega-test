@@ -398,7 +398,7 @@ content:
   description: upgrade to Vega
   plan:
     height: "7368587"
-    info: '{"binaries":{"linux/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-linux-amd64?checksum=sha256:78d626bbb12352c3301b02429188a89104606a5c746d7e3f3d6d4b2a01d04711","linux/arm64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-linux-arm64?checksum=sha256:d15b13e937220eaee77ddb2e1e866adb5e9982041f5f5567b087f7b79b7bf4cd","darwin/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-darwin-amd64?checksum=sha256:a0da886991dcd3bf2a4e5efff37e09b822fe65998bd5ba8d1a9aed1f83796057","windows/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc1/gaiad-v6.0.0-rc1-windows-amd64?checksum=sha256:54b9d0d0d9ea0c3dcfc074270aa2dca95ce395f09e22275b7fd8f4a51f5d7db3"}}'
+    info: '{"binaries":{"linux/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc3/gaiad-v6.0.0-rc3-linux-amd64?checksum=sha256:4b09b0466a6a8e1414e9f161b803023bec8c2fc8286bf1c4e4523a309e52a75c","linux/arm64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc3/gaiad-v6.0.0-rc3-linux-arm64?checksum=sha256:08b31fdd262d1576eae8bf0e7defb5ed680fafbf26bc85a1faec22c1e9d11a22","darwin/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc3/gaiad-v6.0.0-rc3-darwin-amd64?checksum=sha256:dddbaa50ab795e299ccb9f5bedab3f57965ab08d83103c5129bf7fc255950bb3","windows/amd64":"https://github.com/cosmos/gaia/releases/download/v6.0.0-rc3/gaiad-v6.0.0-rc3-windows-amd64.exe?checksum=sha256:e826dd52aee52e476da41b30fa488a50fa91b98e9937438eaa64d7b9cb4415dc"}}'
     name: Vega
     time: ""
     upgraded_client_state: null
