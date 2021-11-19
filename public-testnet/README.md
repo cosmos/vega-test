@@ -7,7 +7,7 @@ We are also available on the `#validators-verified` channel in the [Cosmos Devel
 ## Joining as a validator
 You can continue using the same account and validator key as the one you're using for `cosmoshub-4`. If you'd like to **request testnet ATOMs from the faucet** for delegation, please make an issue with your delegator account information.
 
-**Using Keplr:** Use [this jsfiddle](https://jsfiddle.net/puz9e0tv/7/) to add the `vega-testnet` chain to your Keplr browser extension.
+**Using Keplr:** Use [this jsfiddle](https://jsfiddle.net/qkmecjz2/) to add the `vega-testnet` chain to your Keplr browser extension.
 
 ## Schedule 🗓️ 
 
