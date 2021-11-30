@@ -11,16 +11,19 @@ You can continue using the same account and validator key as the one you're usin
 
 ## Schedule 🗓️ 
 
-⚠️ These dates are subject to change. Please continue checking this page for up to date timelines. ⚠️
 
 | Date                       | Testnet plan                |
 | -------------------------- | --------------------------- |
-| November 8 2021  | Launch testnet chain with Gaia v5 (previous version)  |
-| November 11 2021 | Submit software upgrade proposal            |
-| November 12 2021  | Voting ends                 |
-| November 13 2021    | Vega upgrade (Gaia v6-rc3) is live on the testnet |
+| November 8 2021  | ✅ Launch testnet chain with Gaia v5 (previous version)  |
+| November 11 2021 | ✅ Submit software upgrade proposal            |
+| November 12 2021  | ✅ Voting ends                 |
+| November 12 2021    | ✅ Vega upgrade (Gaia v6-rc3) is live on the testnet |
+
+**The Cosmos Hub Testnet for the Vega upgrade successfully passed the upgrade proposal at 12 Nov 2021, 5:09:48pm UTC which resulted in a network upgrade at height 7,453,750 which was at 12 Nov 2021, 20:25:32 UTC.**
 
 ## Configuring your full node 🎛️
+
+🚨 Please launch your node with gaia v5.0.x and start syncing with the network. Your node will halt at block height `7,453,750` as per the [testnet upgrade plan](https://vega-explorer.hypha.coop/proposals/54). At this point you should upgrade your binary to the Vega release candidate, i.e., gaia v6-rc3. 🚨
 
 ### Public testnet Chain-ID
 
