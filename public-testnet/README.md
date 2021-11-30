@@ -23,7 +23,7 @@ You can continue using the same account and validator key as the one you're usin
 
 ## Configuring your full node 🎛️
 
-🚨 Please launch your node with gaia v5.0.x and start syncing with the network. Your node will halt at block height `7,453,750` as per the [testnet upgrade plan](https://vega-explorer.hypha.coop/proposals/54). At this point you should upgrade your binary to the Vega release candidate, i.e., gaia v6-rc3. 🚨
+🚨 Please launch your node with `gaia v5.0.x` and start syncing with the network. Your node will halt at block height `7,453,750` as per the [testnet upgrade plan](https://vega-explorer.hypha.coop/proposals/54). At this point you should upgrade your binary to the Vega release candidate, i.e., `gaia v6.0.0-rc3`. 🚨
 
 ### Public testnet Chain-ID
 
