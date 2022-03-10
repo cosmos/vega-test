@@ -1,4 +1,4 @@
-## ⚠️ The contents of this reposiroty have now moved to the [cosmos/testnets](https://github.com/cosmos/testnets) repository and will be maintained there.
+## ⚠️ The contents of this repository have now been moved tothe [cosmos/testnets](https://github.com/cosmos/testnets) repository and will be maintained there.
 
 # Cosmos-Hub Vega Upgrade Testnet Instructions
 
