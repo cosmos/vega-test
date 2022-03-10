@@ -1,3 +1,5 @@
+## ⚠️ The contents of this reposiroty have now moved to the [cosmos/testnets](https://github.com/cosmos/testnets) repository and will be maintained there.
+
 # Cosmos-Hub Vega Upgrade Testnet Instructions
 
 This repository provides instructions and files to help test the Cosmos Hub Vega upgrade locally or with a public testnet.
