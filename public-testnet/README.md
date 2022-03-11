@@ -1,5 +1,7 @@
 # Cosmos-Hub Vega Upgrade Public Testnet Instructions
 
+> Deprecated since March 2022 in favor of [v7-Theta Testnet](https://github.com/cosmos/testnets/tree/master/v7-theta/public-testnet)
+
 We are running a public testnet for the Vega upgrade. All Cosmos Hub validators are invited to participate in the public testnet. In addition, we are providing a few public endpoints for testing integrations.
 
 We are also available on the `#validators-verified` channel in the [Cosmos Developers discord](https://discord.gg/cosmosnetwork) for support.
