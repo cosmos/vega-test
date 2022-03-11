@@ -47,8 +47,8 @@ The `sha256sum` for the modified genesis file is `89d1cb03d1dbe4eb803319f36f1196
 
 | Node              | Node ID                                    | Public IP      | Ports                                                 |
 | ----------------- | ------------------------------------------ | -------------- | ----------------------------------------------------- |
-| HYPHA "Coinbase"    | `99b04a4efd48846f654da25532c85bd1fa6a6a39` | `198.50.215.1` | p2p: `46656`, rpc: `46657`, api: `4317`, grpc: `4090` |
-| HYPHA "Certus-one"  | `1edc806e29bfb380dc0298ce4fded8e3e8554e2a` | `198.50.215.1` | p2p: `36656`, rpc: `36657`, api: `3327`, grpc: `3080` |
+| HYPHA "Coinbase"    | `99b04a4efd48846f654da25532c85bd1fa6a6a39` | `134.122.35.247` | p2p: `46656`, rpc: `46657`, api: `4317`, grpc: `4090` |
+| HYPHA "Certus-one"  | `1edc806e29bfb380dc0298ce4fded8e3e8554e2a` | `165.22.235.50` | p2p: `36656`, rpc: `36657`, api: `3327`, grpc: `3080` |
 | Interchain "Binance" Sentry | `66a9e52e207c8257b791ff714d29100813e2fa00` | `143.244.151.9` | p2p: `26656 `, rpc: `26657 ` , api: `1317 `, grpc: `9090` |
 
 ### Minimum gas
@@ -70,8 +70,8 @@ Make sure your machine is resourced with 16GB while performing the upgrade. The 
 
 We're serving snapshots every 1000 blocks from the following three nodes. Their p2p listen addresses are (`<node-id>@<public-ip>:<port>`):
 
-* `5303f0b47c98727cd7b19965c73b39ce115d3958@134.122.35.247:26656`
-* `9e1e3ce30f22083f04ea157e287d338cf20482cf@165.22.235.50:26656`
+* `99b04a4efd48846f654da25532c85bd1fa6a6a39@134.122.35.247:26656`
+* `1edc806e29bfb380dc0298ce4fded8e3e8554e2a@165.22.235.50:26656`
 * `b7feb9619bef083e3a3e86925824f023c252745b@143.198.41.219:26656`
 
 Add these to your persistent_peers list to help your nodes discover snapshots quickly. To enable snapshot discovery, you'll need to configure the `[statesync]` section of your `config.toml` file. You'll need to set `enable = true`, set a `trust_height`, a corresponding `trust_hash` (easily found on a block explorer), and at least two trusted RPC servers that your node will use to cross-check hashes. A reccommended trusted block height is "current height - 1000." Note than in the future, the RPC server requirement will be deprecated as state sync is [moved to the p2p layer in Tendermint 0.35](https://github.com/tendermint/tendermint/issues/6491).
